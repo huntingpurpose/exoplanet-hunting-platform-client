@@ -13,16 +13,6 @@ from app.models import Base, Business
 
 app = FastAPI(title="Client Hunting Platform")
 
-@app.get("/cors-debug")
-def cors_debug():
-    return {
-        "cors_loaded": True,
-        "origins": [
-            "https://client-hunting-platform.vercel.app",
-            "http://localhost:3000",
-        ]
-    }
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -33,6 +23,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/cors-debug")
+def cors_debug():
+    return {
+        "cors_loaded": True,
+        "origins": [
+            "https://client-hunting-platform.vercel.app",
+            "http://localhost:3000",
+        ]
+    }
 
 class BusinessCreate(BaseModel):
     name: str
